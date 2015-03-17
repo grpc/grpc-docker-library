@@ -46,7 +46,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc
 RUN cd /var/local/git/grpc && \
-  git pull --recurse-submodules && \
+  git checkout tags/release-0_5_0 && \
   git submodule update --init --recursive
 
 RUN cd /var/local/git/grpc/third_party/protobuf && \

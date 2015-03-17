@@ -27,64 +27,15 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-FROM debian:latest
+FROM ruby:2.1
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc_0.5.0_amd64.deb
+RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc-dev_0.5.0_amd64.deb
+RUN dpkg -i libgrpc_0.5.0_amd64.deb libgrpc-dev_0.5.0_amd64.deb
 
-RUN apt-get update && apt-get install -y \
-  autoconf \
-  automake \
-  autotools-dev \
-  bison \
-  build-essential \
-  curl \
-  g++ \
-  gawk \
-  gcc \
-  git \
-  libc6-dbg \
-  libc6-dev \
-  libffi-dev \
-  libgdbm-dev \
-  libgtest-dev \
-  libgflags-dev \
-  libncurses5-dev \
-  libreadline6-dev \
-  libsqlite3-dev \
-  libssl-dev \
-  libtool \
-  libyaml-dev \
-  make \
-  patch \
-  pkg-config \
-  procps \
-  sqlite3 \
-  unzip \
-  zlib1g-dev && apt-get clean
+RUN mkdir proto-bins
+RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/proto-bins_0.5.0_linux-x86_64.tar.gz
+RUN tar xf proto-bins_0.5.0_linux-x86_64.tar.gz -C proto-bins
+RUN cp proto-bins/* /usr/bin
 
-# Install RVM, use this to install ruby
-RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3  # Needed for RVM
-RUN /bin/bash -l -c "curl -L get.rvm.io | bash -s stable"
-
-# Install Ruby 2.1
-RUN /bin/bash -l -c "rvm install ruby-2.1"
-RUN /bin/bash -l -c "rvm use --default ruby-2.1"
-RUN /bin/bash -l -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-RUN /bin/bash -l -c "echo 'rvm --default use ruby-2.1' >> ~/.bashrc"
-RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
-
-RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc
-RUN cd /var/local/git/grpc && \
-  git pull --recurse-submodules && \
-  git submodule update --init --recursive
-
-# Build and install the protobuf library
-RUN cd /var/local/git/grpc/third_party/protobuf && \
-  ./autogen.sh && \
-  ./configure --prefix=/usr && \
-  make -j12 && make check && make install && make clean
-
-RUN cd /var/local/git/grpc && make install_c
-
-RUN cd /var/local/git/grpc/src/ruby && \
-  /bin/bash -l -c "gem build grpc.gemspec && gem install grpc"
+RUN gem install grpc -v 0.5.0
