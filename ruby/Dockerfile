@@ -33,9 +33,8 @@ RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc_0.
 RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc-dev_0.5.0_amd64.deb
 RUN dpkg -i libgrpc_0.5.0_amd64.deb libgrpc-dev_0.5.0_amd64.deb
 
-RUN mkdir proto-bins
 RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/proto-bins_0.5.0_linux-x86_64.tar.gz
-RUN tar xf proto-bins_0.5.0_linux-x86_64.tar.gz -C proto-bins
-RUN cp proto-bins/* /usr/bin
+RUN tar xf proto-bins_0.5.0_linux-x86_64.tar.gz
+RUN cp proto-bins_0.5.0_linux-x86_64/* /usr/bin
 
 RUN gem install grpc -v 0.5.0
