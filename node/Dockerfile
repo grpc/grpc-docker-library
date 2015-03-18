@@ -27,23 +27,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-FROM node:latest
+FROM node:0.10
 
-RUN apt-get update && apt-get install -y \
-  gcc \
-  git \
-  libc6-dbg \
-  libc6-dev \
-  libgtest-dev \
-  libgflags-dev \
-  libtool \
-  make && apt-get clean
+RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc_0.5.0_amd64.deb
+RUN wget https://github.com/grpc/grpc/releases/download/release-0_5_0/libgrpc-dev_0.5.0_amd64.deb
+RUN dpkg -i libgrpc_0.5.0_amd64.deb libgrpc-dev_0.5.0_amd64.deb
 
-RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc
-RUN cd /var/local/git/grpc && \
-  git pull --recurse-submodules && \
-  git submodule update --init --recursive
-
-RUN cd /var/local/git/grpc && make install_c
-
-RUN npm install -g grpc
+RUN npm install -g grpc@0.5.0
