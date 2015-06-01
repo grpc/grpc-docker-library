@@ -44,7 +44,6 @@ RUN cd /var/local/git/grpc \
   && pip install src/python/interop
 
 # Run Python GRPC's tests
-# TODO(nathaniel): It would be nice for these to be auto-discoverable?
 RUN cd /var/local/git/grpc \
   && make test_python
 
