@@ -51,9 +51,9 @@ ENV PATH $PATH:$JAVA_HOME/bin:$M2_HOME/bin
 ENV LD_LIBRARY_PATH /usr/local/lib
 
 # Get the protobuf source from GitHub and install it
-RUN wget -O - https://github.com/google/protobuf/archive/v3.0.0-alpha-2.tar.gz | \
+RUN wget -O - https://github.com/google/protobuf/archive/v3.0.0-alpha-3.tar.gz | \
   tar xz && \
-  cd protobuf-3.0.0-alpha-2 && \
+  cd protobuf-3.0.0-alpha-3 && \
   ./autogen.sh && \
   ./configure --prefix=/usr && \
   make -j12 && make check && make install && \

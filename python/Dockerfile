@@ -56,5 +56,5 @@ RUN cd /var/local/git/grpc/third_party/protobuf && \
 
 RUN cd /var/local/git/grpc && make install_c
 
-RUN pip install enum34==1.0.4 futures==2.2.0 protobuf==3.0.0-alpha-1
+RUN pip install enum34==1.0.4 futures==2.2.0 protobuf==3.0.0a3
 RUN cd /var/local/git/grpc && pip install src/python/src
