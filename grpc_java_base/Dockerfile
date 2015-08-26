@@ -62,8 +62,6 @@ RUN wget -O - https://github.com/google/protobuf/archive/v3.0.0-alpha-2.tar.gz |
 # Trigger download of as many Maven and Gradle artifacts as possible. We don't build grpc-java
 # because we don't want to install netty
 RUN git clone --recursive --depth 1 https://github.com/grpc/grpc-java.git && \
-  cd grpc-java/lib/netty && \
-  mvn -pl codec-http2 -am -DskipTests verify && \
-  cd ../.. && \
+  cd grpc-java && \
   ./gradlew && \
   rm -r "$(pwd)"

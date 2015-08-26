@@ -31,7 +31,5 @@
 FROM grpc/java_base
 
 RUN git clone --recursive --depth 1 https://github.com/grpc/grpc-java.git /var/local/git/grpc-java
-RUN cd /var/local/git/grpc-java/lib/netty && \
-  mvn -pl codec-http2 -am -DskipTests install clean
 RUN cd /var/local/git/grpc-java && \
   ./gradlew build
