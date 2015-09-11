@@ -27,13 +27,33 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-FROM ruby:2.2
+FROM buildpack-deps:jessie
 
-RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
+RUN apt-get update && apt-get install -y \
+  autoconf \
+  autotools-dev \
+  build-essential \
+  curl \
+  gcc \
+  git \
+  libc6-dbg \
+  libc6-dev \
+  libgtest-dev \
+  libgflags-dev \
+  libtool \
+  make \
+  unzip && apt-get clean
 
-ENV GRPC_VERSION 0.10.2-1~bpo8+1
-ENV GRPC_RUBY_VERSION 0.10.0
+ENV GRPC_RELEASE_TAG release-0_10_2
 
-RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
+RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc
+RUN cd /var/local/git/grpc && \
+  git checkout tags/${GRPC_RELEASE_TAG} && \
+  git submodule update --init --recursive
 
-RUN gem install grpc -v ${GRPC_RUBY_VERSION}
+RUN cd /var/local/git/grpc/third_party/protobuf && \
+  ./autogen.sh && \
+  ./configure --prefix=/usr && \
+  make -j12 && make check && make install && make clean
+
+RUN cd /var/local/git/grpc && make install

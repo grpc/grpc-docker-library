@@ -31,7 +31,8 @@ FROM php:5.5
 
 RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
 
+ENV GRPC_VERSION 0.10.2-1~bpo8+1
 
-RUN apt-get update && apt-get install -y -q php5 php5-dev phpunit php-pear libgrpc-dev
+RUN apt-get update && apt-get install -y -q php5 php5-dev phpunit php-pear libgrpc-dev=${GRPC_VERSION}
 
 RUN pecl install grpc-alpha
