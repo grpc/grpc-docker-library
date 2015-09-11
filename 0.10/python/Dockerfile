@@ -31,6 +31,9 @@ FROM python:2.7.10
 
 RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y -q libgrpc-dev
+ENV GRPC_VERSION 0.10.2-1~bpo8+1
+ENV GRPC_PYTHON_VERSION 0.10.0a0
 
-RUN pip install grpcio==0.10.0a0
+RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
+
+RUN pip install grpcio==${GRPC_PYTHON_VERSION}

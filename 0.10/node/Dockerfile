@@ -31,6 +31,9 @@ FROM node:0.12.7
 
 RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y -q libgrpc-dev
+ENV GRPC_VERSION 0.10.2-1~bpo8+1
+ENV GRPC_NODE_VERSION 0.10.1
 
-RUN npm install -g grpc@0.10.1
+RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
+
+RUN npm install -g grpc@${GRPC_NODE_VERSION}
