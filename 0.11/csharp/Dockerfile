@@ -43,13 +43,14 @@ RUN apt-get update && apt-get install -y mono-complete mono-devel nuget && apt-g
 # Install trusted root certificates needed to restore NuGet packages
 RUN mozroots --import --sync
 
+ENV GRPC_RELEASE_TAG=0_11_0
 ENV GRPC_VERSION=0.11.0.0-1
 ENV GRPC_VERSION_BACKPORTS=${GRPC_VERSION}~bpo8+2
 
 RUN apt-get update && apt-get install -y -q wget libgrpc0=${GRPC_VERSION_BACKPORTS} && apt-get clean
 
 # Download and install C# native extension
-RUN cd /root && wget https://github.com/grpc/grpc/releases/download/release-0_11_0/libgrpc-csharp-ext0_${GRPC_VERSION}_amd64.deb \
+RUN cd /root && wget https://github.com/grpc/grpc/releases/download/release-${GRPC_RELEASE_TAG}/libgrpc-csharp-ext0_${GRPC_VERSION}_amd64.deb \
     && dpkg -i libgrpc-csharp-ext0_${GRPC_VERSION}_amd64.deb
 
 # Define the default command.
