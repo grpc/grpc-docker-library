@@ -16,7 +16,7 @@ the official gRPC documentation.
 
 
 ```dockerfile
-FROM grpc/python:0.10-onbuild
+FROM grpc/python:0.11-onbuild
 CMD [ "python", "./your-daemon-or-script.py" ]
 ```
 
@@ -40,7 +40,7 @@ Python Docker image directly:
 
 
 ```console
-$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/python:0.10 python your-grpc-python-client-or-server.py
+$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/python:0.11 python your-grpc-python-client-or-server.py
 ```
 
 [grpc]:http:/grpc.io

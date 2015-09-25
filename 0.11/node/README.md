@@ -14,7 +14,7 @@ the official gRPC documentation.
 ## Create a `Dockerfile` in your gRPC Node.js app project
 
 ```dockerfile
-FROM grpc/node:0.10-onbuild
+FROM grpc/node:0.11-onbuild
 # replace this with your application's default port
 EXPOSE 8888
 ```
@@ -38,7 +38,7 @@ For many simple, single file projects, you may find it inconvenient to write a
 Node.js Docker image directly:
 
 ```console
-$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/node:0.10 node your-grpc-client-or-server.js
+$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/node:0.11 node your-grpc-client-or-server.js
 ```
 
 

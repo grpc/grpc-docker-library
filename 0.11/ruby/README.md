@@ -14,7 +14,7 @@ the official gRPC documentation.
 ## Create a `Dockerfile` in your gRPC Ruby app project
 
 ```dockerfile
-FROM grpc/ruby:0.10-onbuild
+FROM grpc/ruby:0.11-onbuild
 CMD ["./your-client-or-server.rb"]
 ```
 
@@ -39,7 +39,7 @@ run` will help you generate one. Run it in the root of your app, next to the
 
 
 ```console
-$ docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app grpc/ruby:0.10 bundle install
+$ docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app grpc/ruby:0.11 bundle install
 ```
 
 ## Run a single Ruby script
@@ -50,7 +50,7 @@ gRPC Ruby Docker image directly:
 
 
 ```console
-$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/ruby:0.10 ruby your-grpc-client-or-server.rb
+$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp grpc/ruby:0.11 ruby your-grpc-client-or-server.rb
 ```
 
 
