@@ -32,7 +32,7 @@ FROM ruby:2.2
 RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /etc/apt/sources.list
 
 ENV GRPC_VERSION 0.11.0.0-1~bpo8+2
-ENV GRPC_RUBY_VERSION 0.11.1
+ENV GRPC_RUBY_VERSION 0.11.0
 
 RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
 
