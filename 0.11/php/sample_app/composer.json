@@ -1,0 +1,14 @@
+{
+  "require": {
+    "php": ">=5.5.0",
+    "grpc/grpc": "dev-release-0_11",
+    "google/auth": "dev-master",
+    "datto/protobuf-php": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/stanley-cheung/Protobuf-PHP"
+    }
+  ]
+}
