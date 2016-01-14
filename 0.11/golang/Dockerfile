@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Dockerfile for gRPC Go
-FROM golang:1.4
+FROM golang:1.5
 
 # NOTE: for now, this docker image always builds the current HEAD version of
 # gRPC.  After gRPC's beta release, the Dockerfile versions will be updated to
