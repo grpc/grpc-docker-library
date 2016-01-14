@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Dockerfile for gRPC Go
-FROM golang:1.4
+FROM golang:1.5
 
 # install protobuf from source
 RUN apt-get update && \
