@@ -50,3 +50,5 @@ RUN git clone https://github.com/google/protobuf.git && \
 
 # Get the source from GitHub
 RUN go get google.golang.org/grpc
+# Install protoc-gen-go
+RUN go get github.com/golang/protobuf/protoc-gen-go
