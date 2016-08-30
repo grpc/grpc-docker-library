@@ -1,0 +1,78 @@
+# gRPC PHP Docker image
+
+This is the official docker image for the PHP library of [gRPC][].  For an
+overview and usage examples, see the [gRPC PHP documentation][].
+
+# What is gRPC ?
+
+A high performance, open source, general RPC framework that puts mobile and
+HTTP/2 first, available in many programming languages.  For full details, see
+the official [gRPC documentation][].
+
+# How to use this image
+
+Assume that you are building an app called `sample_app`
+
+```sh
+$ mkdir -p sample_app
+```
+
+You will need the following files in the [`sample_app`](./sample_app) directory
+
+
+Build a `Dockerfile` for your app, based on the gRPC PHP onbuild image.
+
+```dockerfile
+FROM grpc/php:1.0-onbuild
+
+CMD ["apache2ctl", "-DFOREGROUND"]
+```
+
+You will need a `composer.json` file, similar to this
+
+```json
+{
+  "name": "grpc/grpc-demo",
+  "description": "gRPC example for PHP",
+  "require": {
+    "grpc/grpc": "v1.0.0"
+  }
+}
+```
+
+Assume that you have a service defined in a `helloworld.proto` file. Use
+the `protoc-gen-php` tool to generate the client stub `helloworld.php` file.
+
+```sh
+$ protoc-gen-php -i sample_app/ -o sample_app/ helloworld.proto
+```
+
+Build your client app: `client.php`
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+require 'helloworld.php';
+
+$client = new helloworld\GreeterClient('localhost:50051', []);
+var_dump($client);
+```
+
+Build the app's docker image
+
+```sh
+$ docker build -t grpc-php-client sample_app/
+```
+
+Run the docker image, which will start an Apache server
+
+```sh
+$ docker run -it --rm -p 9998:80 grpc-php-client
+```
+
+Use a browser to test your app: `localhost:9998/client.php`
+
+[gRPC]:http:/grpc.io
+[gRPC documentation]:http://www.grpc.io/docs/
+[gRPC PHP documentation]:http://www.grpc.io/docs/tutorials/basic/php.html
