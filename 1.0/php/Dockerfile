@@ -36,17 +36,12 @@ RUN cd /usr/local/bin && mv composer.phar composer
 
 RUN pecl install grpc
 
-#install protoc and Protobuf-PHP
+#install protoc
 RUN mkdir -p /tmp/protoc && \
-    curl -L https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
+    curl -L https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
     cd /tmp/protoc && \
     unzip protoc.zip && \
     cp /tmp/protoc/bin/protoc /usr/local/bin && \
     cd /tmp && \
-    rm -r /tmp/protoc
-
-RUN cd /tmp && git clone https://github.com/stanley-cheung/Protobuf-PHP && \
-    cd Protobuf-PHP && \
-    rake pear:package version=1.0 && \
-    pear install Protobuf-1.0.tgz && \
-    cd /tmp && rm -r Protobuf-PHP
+    rm -r /tmp/protoc && \
+    docker-php-ext-enable grpc
