@@ -3,6 +3,6 @@
   "description": "gRPC example for PHP",
   "require": {
     "php": ">=5.5.0",
-    "grpc/grpc": "v1.0.0"
+    "grpc/grpc": "v1.2.0"
   }
 }

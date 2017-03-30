@@ -1,7 +1,18 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'helloworld.php';
+require 'Helloworld/GreeterClient.php';
+require 'helloworld.pb.php';
 
-$client = new helloworld\GreeterClient('localhost:50051', []);
-var_dump($client);
+
+$client = new \Helloworld\GreeterClient('localhost:50051', [
+	'credentials' => Grpc\ChannelCredentials::createInsecure(),
+]);
+
+$req = new \Helloworld\HelloRequest();
+$req->setName('gRPC World');
+
+$resp = $client->SayHello($req);
+list($resp, $status) = $client->SayHello($req)->wait();
+
+var_dump($resp->getMessage(), $status);
