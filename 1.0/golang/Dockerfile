@@ -37,7 +37,7 @@ RUN mkdir -p /tmp/protoc && \
     curl -L https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
     cd /tmp/protoc && \
     unzip protoc.zip && \
-    cp /tmp/protoc/bin/protoc /usr/local/bin && \
+    cp -R /tmp/protoc/* /usr/local/ && \
     chmod go+rx /usr/local/bin/protoc && \
     cd /tmp && \
     rm -r /tmp/protoc
