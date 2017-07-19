@@ -38,6 +38,7 @@ RUN mkdir -p /tmp/protoc && \
     cd /tmp/protoc && \
     unzip protoc.zip && \
     cp /tmp/protoc/bin/protoc /usr/local/bin && \
+    cp -R /tmp/protoc/include/* /usr/local/include && \
     chmod go+rx /usr/local/bin/protoc && \
     cd /tmp && \
     rm -r /tmp/protoc
