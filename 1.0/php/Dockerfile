@@ -42,6 +42,7 @@ RUN mkdir -p /tmp/protoc && \
     cd /tmp/protoc && \
     unzip protoc.zip && \
     cp /tmp/protoc/bin/protoc /usr/local/bin && \
+    cp -R include/google /usr/local/include/ && \
     cd /tmp && \
     rm -r /tmp/protoc && \
     docker-php-ext-enable grpc
