@@ -47,11 +47,11 @@ RUN mkdir -p /tmp/protoc && \
 
 # Get the source from GitHub
 RUN mkdir -p /tmp/grpc-go && \
-    curl -L https://github.com/grpc/grpc-go/archive/v1.13.0.zip > /tmp/grpc-go/grpc-go.zip && \
+    curl -L https://github.com/grpc/grpc-go/archive/v1.0.0.zip > /tmp/grpc-go/grpc-go.zip && \
     cd /tmp/grpc-go && \
     unzip grpc-go.zip && \
     mkdir -p /go/src/google.golang.org/grpc/ && \
-    cp -r /tmp/grpc-go/grpc-go-1.13.0/* /go/src/google.golang.org/grpc/
+    cp -r /tmp/grpc-go/grpc-go-1.0.0/* /go/src/google.golang.org/grpc/
 
 # Install protoc-gen-go
 RUN mkdir -p /tmp/protobuf && \
@@ -61,4 +61,3 @@ RUN mkdir -p /tmp/protobuf && \
     mkdir -p /go/src/github.com/golang/protobuf/ && \
     cp -r /tmp/protobuf/protobuf-1.1.0/* /go/src/github.com/golang/protobuf/ && \
     go install github.com/golang/protobuf/protoc-gen-go
-
