@@ -25,7 +25,11 @@ RUN apk add --update --no-cache \
 
 ENV GRPC_PYTHON_VERSION 1.12.1
 RUN python -m pip install --upgrade pip
-RUN pip install --install-option="--prefix=/install" grpcio==${GRPC_PYTHON_VERSION} grpcio-tools==${GRPC_PYTHON_VERSION} grpcio-reflection==${GRPC_PYTHON_VERSION} grpcio-health-checking==${GRPC_PYTHON_VERSION}
+RUN pip install --install-option="--prefix=/install" \
+    grpcio==${GRPC_PYTHON_VERSION} \
+    grpcio-tools==${GRPC_PYTHON_VERSION} \
+    grpcio-reflection==${GRPC_PYTHON_VERSION}  \
+    grpcio-health-checking==${GRPC_PYTHON_VERSION}
 
 FROM base
 
