@@ -1,4 +1,4 @@
-# Copyright 2016, Google Inc.
+# Copyright 2018 The gRPC Authors
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
