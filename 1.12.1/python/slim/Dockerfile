@@ -15,7 +15,9 @@
 FROM python:3.6-slim
 
 ENV GRPC_PYTHON_VERSION 1.12.1
+
 RUN python -m pip install --upgrade pip
+
 RUN pip install grpcio==${GRPC_PYTHON_VERSION} \
     grpcio-tools==${GRPC_PYTHON_VERSION} \
     grpcio-reflection==${GRPC_PYTHON_VERSION} \
