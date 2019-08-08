@@ -28,27 +28,23 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Dockerfile for gRPC Go
-FROM golang:1.5
+FROM golang:1.12
 
 # install protobuf from source
-RUN apt-get update && \
-    apt-get -y install git unzip build-essential autoconf libtool
-RUN git clone https://github.com/google/protobuf.git && \
-    cd protobuf && \
-    ./autogen.sh && \
-    ./configure && \
-    make && \
-    make install && \
-    ldconfig && \
-    make clean && \
-    cd .. && \
-    rm -r protobuf
-
-# NOTE: for now, this docker image always builds the current HEAD version of
-# gRPC.  After gRPC's beta release, the Dockerfile versions will be updated to
-# build a specific version.
+ENV PB_VER 3.9.1 
+ENV PB_URL https://github.com/google/protobuf/releases/download/v${PB_VER}/protoc-${PB_VER}-linux-x86_64.zip
+RUN apt-get update && apt-get install -y unzip && mkdir -p /tmp/protoc && \
+  curl -L ${PB_URL} > /tmp/protoc/protoc.zip && \
+  cd /tmp/protoc && \
+  unzip protoc.zip && \
+  cp /tmp/protoc/bin/protoc /usr/local/bin &&  \
+  cp -R /tmp/protoc/include/* /usr/local/include && \
+  chmod go+rx /usr/local/bin/protoc && \
+  cd /tmp && \
+  rm -r /tmp/protoc
 
 # Get the source from GitHub
-RUN go get google.golang.org/grpc
+ENV  GO111MODULE on
+RUN go get google.golang.org/grpc@v1.22.1
 # Install protoc-gen-go
 RUN go get github.com/golang/protobuf/protoc-gen-go
