@@ -1,7 +1,7 @@
 # IMPORTANT: This repository contains gRPC docker images that are no longer maintained and most of them are out of date (and potentially broken).
 
 *We are working on providing an improved installation story and a better automated mechanism for updating the docker images
-in this repository. Until than happens, please refrain from using the docker images defined in this repository.*
+in this repository. Until than happens, please refrain from using the docker images defined here.*
 
 # About this repo
 
