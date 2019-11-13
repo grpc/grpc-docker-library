@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.6
+FROM grpc/python:1.12.1
 
-ENV GRPC_PYTHON_VERSION 1.4.0
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN python -m pip install --upgrade pip
+ONBUILD COPY requirements.txt /usr/src/app/
+ONBUILD RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install grpcio==${GRPC_PYTHON_VERSION} grpcio-tools==${GRPC_PYTHON_VERSION}
+ONBUILD COPY . /usr/src/app
