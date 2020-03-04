@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 FROM php:7-apache
 
-RUN apt-get update && apt-get install -y -q git rake ruby-ronn zlib1g-dev && apt-get clean
+RUN apt-get update && apt-get --no-install-recommends install -y -q git rake ruby-ronn zlib1g-dev && apt-get clean
 
 # install composer
 RUN cd /usr/local/bin && curl -sS https://getcomposer.org/installer | php

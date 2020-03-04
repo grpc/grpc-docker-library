@@ -38,7 +38,7 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" | tee /e
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy-apache24-compat main" | tee -a /etc/apt/sources.list.d/mono-xamarin.list
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy-libjpeg62-compat main" | tee -a /etc/apt/sources.list.d/mono-xamarin.list
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy-libtiff-compat main" | tee -a /etc/apt/sources.list.d/mono-xamarin.list
-RUN apt-get update && apt-get install -y mono-complete mono-devel nuget && apt-get clean
+RUN apt-get update && apt-get --no-install-recommends install -y mono-complete mono-devel nuget && apt-get clean
 
 # Install trusted root certificates needed to restore NuGet packages
 RUN mozroots --import --sync
@@ -47,7 +47,7 @@ ENV GRPC_RELEASE_TAG=0_11_0
 ENV GRPC_VERSION=0.11.0.0-1
 ENV GRPC_VERSION_BACKPORTS=${GRPC_VERSION}~bpo8+2
 
-RUN apt-get update && apt-get install -y -q wget libgrpc0=${GRPC_VERSION_BACKPORTS} && apt-get clean
+RUN apt-get update && apt-get --no-install-recommends install -y -q wget libgrpc0=${GRPC_VERSION_BACKPORTS} && apt-get clean
 
 # Download and install C# native extension
 RUN cd /root && wget https://github.com/grpc/grpc/releases/download/release-${GRPC_RELEASE_TAG}/libgrpc-csharp-ext0_${GRPC_VERSION}_amd64.deb \

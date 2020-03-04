@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y -q apache2 git php5 php5-dev \
+RUN apt-get update && apt-get --no-install-recommends install -y -q apache2 git php5 php5-dev \
   phpunit php-pear
 
 RUN cd /usr/local/bin && curl -sS https://getcomposer.org/installer | php
@@ -37,7 +37,7 @@ RUN cd /usr/local/bin && mv composer.phar composer
 ENV GRPC_VERSION 0.11.1-1~bpo8+1
 RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | \
   tee -a /etc/apt/sources.list
-RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
+RUN apt-get update && apt-get --no-install-recommends install -y -q libgrpc-dev=${GRPC_VERSION}
 
 RUN pecl install grpc-beta
 RUN echo "extension=grpc.so" > /etc/php5/apache2/conf.d/30-grpc.ini

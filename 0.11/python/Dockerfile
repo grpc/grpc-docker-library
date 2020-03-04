@@ -34,6 +34,6 @@ RUN echo "deb http://ftp.us.debian.org/debian jessie-backports main" | tee -a /e
 ENV GRPC_VERSION 0.11.0.0-1~bpo8+2
 ENV GRPC_PYTHON_VERSION 0.11.0b1
 
-RUN apt-get update && apt-get install -y -q libgrpc-dev=${GRPC_VERSION}
+RUN apt-get update && apt-get --no-install-recommends install -y -q libgrpc-dev=${GRPC_VERSION}
 
 RUN pip install grpcio==${GRPC_PYTHON_VERSION}
